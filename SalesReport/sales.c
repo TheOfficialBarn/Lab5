@@ -2,21 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAXLINES 12
+#define MONTHS 12
 #define MAXLEN 100
 
 
 // ————————————————————— PROTOTYPE FUNCTIONS ————————————————————————————————————————————
-void printMonth(double sales[MAXLINES], char months[MAXLINES][MAXLEN]);
-void printSummary(double sales[MAXLINES], char months[MAXLINES][MAXLEN]);
-void sixMonthAverage(double sales[MAXLINES], char months[MAXLINES][MAXLEN], int start);
-void printReport(double sales[MAXLINES], char months[MAXLINES][MAXLEN], int counter);
+void printMonth(double sales[MONTHS], char months[MONTHS][MAXLEN]);
+void printSummary(double sales[MONTHS], char months[MONTHS][MAXLEN]);
+void sixMonthAverage(double sales[MONTHS], char months[MONTHS][MAXLEN], int start);
+void printReport(double sales[MONTHS], char months[MONTHS][MAXLEN], int counter);
 // ————————————————————— PROTOTYPE FUNCTIONS ————————————————————————————————————————————
 
 // ————————————————————— MAIN FUNCTION ————————————————————————————————————————————
 int main(){
 	FILE* filePtr;
-	char monthSales[MAXLINES][MAXLEN];
+	char monthSales[MONTHS][MAXLEN];
 	double realSales[12];
 	char months[12][MAXLEN] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 	int start = 0;
@@ -49,14 +49,14 @@ int main(){
 // ————————————————————— MAIN FUNCTION ————————————————————————————————————————————
 
 // ————————————————————— FUNCTION DEFINITIONS ————————————————————————————————————————————
-void printMonth(double sales[MAXLINES], char months[MAXLINES][MAXLEN]){
+void printMonth(double sales[MONTHS], char months[MONTHS][MAXLEN]){
 	printf("%-10s %6s\n", "Month", "Sales");
-	for(int x=0; x<MAXLINES; x++){
+	for(int x=0; x<MONTHS; x++){
 		printf("%-10s%10.2lf\n", months[x], sales[x]);
 	}
 }
 
-void printSummary(double sales[MAXLINES], char months[MAXLINES][MAXLEN]){
+void printSummary(double sales[MONTHS], char months[MONTHS][MAXLEN]){
 	double max = sales[0];
 	double min = sales[0];
 	int maxIndex = 0;
@@ -66,7 +66,7 @@ void printSummary(double sales[MAXLINES], char months[MAXLINES][MAXLEN]){
 
 	printf("\n—————————————————————————————\nSales Summary Report:");
 
-	for(x=0; x<MAXLINES; x++){
+	for(x=0; x<MONTHS; x++){
 		if(sales[x] > max){
 			max = sales[x];
 			maxIndex = x;
@@ -76,15 +76,15 @@ void printSummary(double sales[MAXLINES], char months[MAXLINES][MAXLEN]){
 		}
 	}
 
-	for(int y=0; y<MAXLINES; y++){
+	for(int y=0; y<MONTHS; y++){
 		average += sales[y];
 	}
-	average /= MAXLINES;
+	average /= MONTHS;
 
 	printf("\n%-5s $%5.2lf (%7s)\n%-5s $%5.2lf (%7s)\n%-5s $%5.2lf\n", "Minimum Sales: ", min, months[minIndex], "Maximum Sales: ", max, months[maxIndex], "Average Sales: ", average);
 }
 
-void sixMonthAverage(double sales[MAXLINES], char months[MAXLINES][MAXLEN], int start){
+void sixMonthAverage(double sales[MONTHS], char months[MONTHS][MAXLEN], int start){
 	if(start==0){
 		printf("\nSix-Month Moving Average Report: \n");
 	}
@@ -102,7 +102,7 @@ void sixMonthAverage(double sales[MAXLINES], char months[MAXLINES][MAXLEN], int 
 	}
 }
 
-void printReport(double sales[MAXLINES], char months[MAXLINES][MAXLEN], int counter){
+void printReport(double sales[MONTHS], char months[MONTHS][MAXLEN], int counter){
 	int x;
 	int maxIndex;
 	double max = sales[0];
@@ -111,7 +111,7 @@ void printReport(double sales[MAXLINES], char months[MAXLINES][MAXLEN], int coun
 		return;
 	} else {
 		if(counter == 0) printf("\nSales Report: \n");
-		for (x=1; x<MAXLINES; x++){
+		for (x=1; x<MONTHS; x++){
 			if (sales[x]>max){
 				max = sales[x];
 				maxIndex = x;
